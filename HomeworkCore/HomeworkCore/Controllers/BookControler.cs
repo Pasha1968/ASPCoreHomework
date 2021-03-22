@@ -61,6 +61,13 @@ namespace HomeworkCore.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            Book res;
+            using (AppDB db = new AppDB())
+            {
+                res = db.Books.Find(id);
+                db.Remove(res);
+                db.SaveChanges();
+            }
         }
     }
 }
