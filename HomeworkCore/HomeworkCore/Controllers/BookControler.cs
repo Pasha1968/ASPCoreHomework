@@ -52,14 +52,21 @@ namespace HomeworkCore.Controllers
         }
 
         // PUT api/<BookControler>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        public IActionResult Put( [FromBody] Book book)
         {
+            using (AppDB db = new AppDB())
+            {
+                db.Entry(book).State = EntityState.Modified;
+                db.Update(book);
+                db.SaveChanges();
+            }
+            return Ok(book);
         }
 
         // DELETE api/<BookControler>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
             Book res;
             using (AppDB db = new AppDB())
@@ -68,6 +75,7 @@ namespace HomeworkCore.Controllers
                 db.Remove(res);
                 db.SaveChanges();
             }
+            return Ok(res);
         }
     }
 }
