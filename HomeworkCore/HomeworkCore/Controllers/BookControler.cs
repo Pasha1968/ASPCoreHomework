@@ -1,6 +1,7 @@
 ﻿using HomeworkCore.Data;
 using HomeworkCore.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace HomeworkCore.Controllers
             List<Book> bookList;
             using (AppDB db = new AppDB())
             {
-                bookList = db.Books.ToList();//.Select(x => new Book(x)).ToList();
+                bookList = db.Books.Include(u => u.Genre).ToList();//.Select(x => new Book(x)).ToList();
             }
             return Ok(bookList);
         }
