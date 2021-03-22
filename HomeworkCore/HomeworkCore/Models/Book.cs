@@ -13,5 +13,7 @@ namespace HomeworkCore.Models
         public string Publisher { get; set; }
         [Range(1, 2030)]
         public int year { get; set; }
+        public int GenreId { get; set; }
+        public Genre Genre { get; set; }
     }
 }
