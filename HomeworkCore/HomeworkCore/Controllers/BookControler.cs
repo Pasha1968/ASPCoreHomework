@@ -42,8 +42,13 @@ namespace HomeworkCore.Controllers
 
         // POST api/<BookControler>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] Book book)
         {
+            using (AppDB db = new AppDB())
+            {
+                db.Books.Add(book);
+                db.SaveChanges();
+            }
         }
 
         // PUT api/<BookControler>/5
