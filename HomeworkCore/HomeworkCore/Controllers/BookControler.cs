@@ -22,7 +22,9 @@ namespace HomeworkCore.Controllers
             List<Book> bookList;
             using (AppDB db = new AppDB())
             {
-                bookList = db.Books.Include(u => u.Genre).ToList();//.Select(x => new Book(x)).ToList();
+                bookList = db.Books
+                    //.Include(u => u.Genre)
+                    .ToList();
             }
             return Ok(bookList);
         }
