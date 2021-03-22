@@ -31,9 +31,13 @@ namespace HomeworkCore.Controllers
 
         // GET api/<BookControler>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult Get(int id)
         {
-            return "value";
+            Book res;
+            using (AppDB db = new AppDB()) {
+                res = db.Books.Find(id);
+            }
+            return Ok(res);
         }
 
         // POST api/<BookControler>
